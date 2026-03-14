@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { useTranslations } from "next-intl";
-
 const mockProjects = [
   { id: 1, img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80", title: "Villa Barcelona" },
   { id: 2, img: "https://images.unsplash.com/photo-1600607687644-aac4c15cecb1?auto=format&fit=crop&q=80", title: "Kyiv Apartment" },
@@ -8,12 +6,10 @@ const mockProjects = [
 ];
 
 export function Projects() {
-  const t = useTranslations("Projects");
-  
   return (
     <section id="projects" className="py-24 px-6 md:px-12 bg-black/5 dark:bg-white/5">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-light tracking-wide mb-16">{t("title")}</h2>
+        <h2 className="text-3xl md:text-5xl font-light tracking-wide mb-16">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {mockProjects.map((p) => (
             <div key={p.id} className="group cursor-pointer">
@@ -30,7 +26,7 @@ export function Projects() {
         </div>
         <div className="mt-16 flex justify-center">
           <button className="px-8 py-4 border border-foreground/20 hover:border-accent hover:text-accent transition-colors uppercase tracking-widest text-sm">
-            {t("viewMore")}
+            View All Projects
           </button>
         </div>
       </div>
