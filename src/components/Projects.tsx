@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
+
 const mockProjects = [
-  { id: 1, img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80", title: "Villa Barcelona" },
-  { id: 2, img: "https://images.unsplash.com/photo-1600607687644-aac4c15cecb1?auto=format&fit=crop&q=80", title: "Kyiv Apartment" },
-  { id: 3, img: "https://images.unsplash.com/photo-1600585154526-990dced4e56d?auto=format&fit=crop&q=80", title: "Odesa Residence" },
+  { id: 1, img: "/images/villa-barcelona.png", title: "Villa Barcelona", href: "/projects/villa-barcelona" },
+  { id: 2, img: "/images/kyiv-apartment.png", title: "Kyiv Apartment", href: "/projects/kyiv-apartment" },
+  { id: 3, img: "/images/odesa-residence.png", title: "Odesa Residence", href: "/projects/odesa-residence" },
 ];
 
 export function Projects() {
@@ -12,7 +14,7 @@ export function Projects() {
         <h2 className="text-3xl md:text-5xl font-light tracking-wide mb-16">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {mockProjects.map((p) => (
-            <div key={p.id} className="group cursor-pointer">
+            <Link key={p.id} href={p.href} className="group cursor-pointer block">
               <div className="relative aspect-[4/5] overflow-hidden bg-black/10">
                 <img 
                   src={p.img} 
@@ -21,7 +23,7 @@ export function Projects() {
                 />
               </div>
               <h3 className="mt-6 text-xl font-light tracking-wide group-hover:text-accent transition-colors">{p.title}</h3>
-            </div>
+            </Link>
           ))}
         </div>
         <div className="mt-16 flex justify-center">

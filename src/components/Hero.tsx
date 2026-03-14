@@ -14,6 +14,9 @@ export function Hero() {
         <p className="text-lg md:text-2xl text-white/80 max-w-3xl text-balance font-light hidden md:block mt-4">
           Custom furniture implementation
         </p>
+        <p className="text-sm md:text-lg text-white/60 tracking-[0.15em] uppercase font-light mt-2">
+          Design → Engineering → Production → Installation
+        </p>
         <a 
           href="#projects"
           className="mt-8 px-10 py-5 bg-accent text-white font-bold hover:bg-accent/90 focus:ring-4 focus:ring-accent/30 transition-all uppercase tracking-widest text-sm rounded-none tracking-[0.2em] shadow-lg"
