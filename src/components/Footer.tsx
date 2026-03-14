@@ -1,9 +1,22 @@
+import Link from "next/link";
+
 export function Footer() {
   return (
     <footer className="bg-surface text-foreground py-16 px-6 md:px-12 border-t border-foreground/5">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-        <div>
-          <div className="font-bold text-2xl tracking-widest mb-4">ProSperi</div>
+        <div className="flex flex-col items-start gap-4">
+          <Link href="/" className="relative h-12 w-48 mb-2">
+            <img 
+              src="/logo-black.png" 
+              alt="ProSperi" 
+              className="h-full w-auto object-contain dark:hidden"
+            />
+            <img 
+              src="/logo-gold.png" 
+              alt="ProSperi" 
+              className="h-full w-auto object-contain hidden dark:block"
+            />
+          </Link>
           <p className="text-muted font-light max-w-md">Production partner for architects and interior designers.</p>
         </div>
         <div className="flex gap-6 text-sm font-medium tracking-wider uppercase flex-wrap">

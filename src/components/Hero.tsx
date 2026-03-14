@@ -1,7 +1,8 @@
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 md:px-12 pt-20 border-b border-black/5 dark:border-white/5">
-      <div className="absolute inset-0 z-0 bg-background/50 dark:bg-background/70 backdrop-blur-sm" />
+    <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 md:px-12 pt-20 border-b border-foreground/5">
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-surface/40 via-transparent to-transparent dark:from-background/60" />
+      <div className="absolute inset-0 z-[0] bg-background/30 dark:bg-background/60 backdrop-blur-[2px]" />
       <div className="absolute inset-0 z-[-1] overflow-hidden bg-[url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80')] bg-cover bg-center brightness-[0.7] dark:brightness-[0.4]" />
       
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center gap-8 md:gap-12 w-full animate-in fade-in slide-in-from-bottom-8 duration-1000">
