@@ -113,20 +113,20 @@ const processSteps = [
 
 export function Process() {
   const [activeStep, setActiveStep] = useState(1);
-  const lang = "en" as const; // Defaulting to English. Extracted type safety.
+  const lang = "en" as const;
 
   const activeStepData = processSteps.find((s) => s.id === activeStep) || processSteps[0];
 
   return (
-    <section id="process" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-      <h2 className={`text-3xl md:text-5xl font-light tracking-wide mb-16 text-center ${inter.className}`}>
+    <section id="process" className="py-24 px-6 md:px-12 max-w-7xl mx-auto relative">
+      <h2 className={`text-4xl md:text-5xl font-light tracking-wide mb-16 text-center ${inter.className}`}>
         Our Process
       </h2>
 
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 relative w-full items-start">
         
-        {/* Left Column: Steps List */}
-        <div className="lg:w-1/3 flex overflow-x-auto lg:flex-col lg:overflow-visible pb-6 lg:pb-0 gap-6 lg:gap-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        {/* Left Column: Vertical Steps List (Desktop & Mobile) */}
+        <div className="w-full lg:w-1/2 flex flex-col gap-0">
           {processSteps.map((step) => {
             const isActive = activeStep === step.id;
             
@@ -135,50 +135,66 @@ export function Process() {
                 key={step.id}
                 onClick={() => setActiveStep(step.id)}
                 className={`
-                  group cursor-pointer flex-shrink-0 lg:flex-shrink 
-                  lg:w-full min-w-[240px] lg:min-w-0
-                  border-l-2 lg:py-6 pl-4 lg:pl-8 
+                  group cursor-pointer flex flex-col
+                  border-l-2 py-5 lg:py-6 pl-5 lg:pl-10 
                   transition-all duration-300 ease-out
                   ${isActive 
                     ? "border-[#8C7851]" 
-                    : "border-transparent lg:border-foreground/10 hover:border-[#8C7851]/50"
+                    : "border-foreground/10 hover:border-[#8C7851]/50"
                   }
                 `}
               >
-                <div className="flex items-center gap-4">
+                {/* 1. Typography Focus Logic */}
+                <div 
+                  className={`flex items-center gap-4 lg:gap-6 transition-all duration-500 origin-left 
+                    ${isActive ? "scale-100 opacity-100" : "scale-90 opacity-40"}
+                  `}
+                >
                   <span 
                     className={`
-                      text-xl lg:text-3xl font-semibold transition-colors duration-300
+                      text-2xl lg:text-3xl font-semibold transition-colors duration-300
                       ${playfair.className}
-                      ${isActive ? "text-[#8C7851]" : "text-[#1A1A1A]/40 dark:text-gray-500 group-hover:text-[#8C7851]/70"}
+                      ${isActive ? "text-[#8C7851]" : "text-foreground group-hover:text-[#8C7851]/70"}
                     `}
                   >
                     {step.number}
                   </span>
                   <h3 
                     className={`
-                      text-lg lg:text-xl font-medium transition-colors duration-300
+                      text-xl lg:text-2xl font-medium transition-colors duration-300
                       ${inter.className}
-                      ${isActive ? "text-foreground" : "text-[#1A1A1A]/50 dark:text-gray-400 group-hover:text-foreground/80"}
+                      ${isActive ? "text-foreground" : "text-foreground group-hover:text-foreground/80"}
                     `}
                   >
                     {step.title[lang]}
                   </h3>
                 </div>
 
-                {/* Animated Description under active step */}
+                {/* Mobile Accordion & Description */}
                 <AnimatePresence>
                   {isActive && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden hidden lg:block"
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="overflow-hidden"
                     >
-                      <p className="mt-4 text-sm text-foreground/70 leading-relaxed max-w-[90%]">
+                      <p className="mt-4 text-base text-foreground/75 leading-relaxed max-w-[90%]">
                         {step.description[lang]}
                       </p>
+
+                      {/* Image displayed inside accordion ONLY on Mobile */}
+                      <div className="mt-6 relative w-full aspect-[4/3] rounded-md overflow-hidden bg-muted/30 shadow-md border border-foreground/10 lg:hidden block">
+                        <Image
+                          src={step.imageUrl}
+                          alt={step.title[lang]}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 100vw, 0vw"
+                          priority={step.id === 1}
+                        />
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -187,51 +203,29 @@ export function Process() {
           })}
         </div>
 
-        {/* Right Column: High-Quality Image Viewer */}
-        <div className="lg:w-2/3 flex flex-col gap-6">
-          <div className="relative w-full aspect-[4/3] md:aspect-[16/10] lg:aspect-auto lg:h-[700px] rounded-sm overflow-hidden bg-muted/30 shadow-2xl flex items-center justify-center border border-foreground/5">
+        {/* Right Column: High-Quality Image Viewer (Desktop Only) */}
+        {/* 2. Layout & Image Sync: `sticky top-24` ensures it follows scroll */}
+        <div className="hidden lg:block lg:w-1/2 sticky top-24">
+          <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden bg-muted/30 shadow-2xl border border-foreground/5 transition-all duration-300">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStepData.id}
-                initial={{ opacity: 0, filter: "blur(4px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
+                initial={{ opacity: 0, scale: 1.05, filter: "blur(4px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 className="absolute inset-0 w-full h-full"
               >
-                {/* 
-                  Uses localized Next.js `<Image />` component. 
-                  If images are not yet added to /public/images/process/, standard alt text or fallback container will show.
-                */}
                 <Image
                   src={activeStepData.imageUrl}
                   alt={activeStepData.title[lang]}
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="object-cover shadow-inner"
+                  sizes="50vw"
                   priority={activeStepData.id === 1}
                 />
-                
-                {/* Elegant dark overlay gradient for maximum text visibility on mobile layout */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent lg:hidden" />
               </motion.div>
             </AnimatePresence>
-            
-            {/* Fallback pattern for when images are missing in local dev (acts as skeleton) */}
-            <div className="absolute inset-0 -z-10 flex items-center justify-center">
-              <div className="text-center opacity-30">
-                <span className={`text-6xl ${playfair.className} block mb-2`}>{activeStepData.number}</span>
-                <span className={`text-sm tracking-widest uppercase ${inter.className}`}>Image Placeholder</span>
-              </div>
-            </div>
-            
-            {/* Mobile Description overlay (visible only on small screens over image) */}
-            <div className="absolute bottom-6 left-6 right-6 lg:hidden z-10 text-white drop-shadow-md border-l-2 border-[#8C7851] pl-4">
-              <h4 className={`text-lg font-medium mb-1 ${inter.className}`}>{activeStepData.title[lang]}</h4>
-              <p className="text-sm font-light leading-relaxed text-white/90">
-                {activeStepData.description[lang]}
-              </p>
-            </div>
           </div>
         </div>
 
@@ -256,7 +250,6 @@ export function Process() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
           </span>
-          {/* Hover background effect */}
           <div className="absolute inset-0 bg-[#8C7851] transform scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 ease-in-out" />
         </button>
       </div>
