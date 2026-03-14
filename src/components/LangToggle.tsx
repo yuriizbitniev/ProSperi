@@ -28,6 +28,9 @@ export function LangToggle() {
       switchPath = `/${nextLocale}${segments.length > 0 ? '/' + segments.join('/') : ''}`;
     }
     
+    // Set cookie so middleware knows user preference (ignores Accept-Language)
+    document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000`;
+    
     // Force a full document reload for locale cache bypass
     window.location.href = switchPath;
   };
