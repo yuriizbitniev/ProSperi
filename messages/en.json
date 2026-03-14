@@ -1,0 +1,61 @@
+{
+  "Index": {
+    "title": "ProSperi",
+    "description": "Custom furniture implementation",
+    "heroSubtitle": "Production partner for architects and interior designers",
+    "heroAction": "View Projects"
+  },
+  "Navigation": {
+    "projects": "Projects",
+    "about": "About",
+    "process": "Process",
+    "contact": "Contact"
+  },
+  "About": {
+    "title": "About Company",
+    "text": "ProSperi is a production studio specializing in custom furniture implementation for architectural and interior design projects."
+  },
+  "Projects": {
+    "title": "Projects",
+    "viewMore": "View All Projects"
+  },
+  "Process": {
+    "title": "Our Process",
+    "steps": [
+      "Design Review", "Technical Estimate", "Agreement",
+      "Site Measurement", "Working Drawings", "Engineering",
+      "Production", "Quality Control", "Logistics", "Installation"
+    ]
+  },
+  "Capabilities": {
+    "title": "Capabilities",
+    "items": ["Custom kitchens", "Wardrobes", "Wall panels", "Architectural furniture", "Custom joinery"]
+  },
+  "PrivateClients": {
+    "title": "Private Clients",
+    "text": "ProSperi also works directly with private clients developing apartments and houses."
+  },
+  "Contacts": {
+    "title": "Contact Us",
+    "email": "hello@prosperi.com",
+    "whatsapp": "WhatsApp",
+    "location": "Locations",
+    "euAvailability": "Available for projects across the European Union",
+    "locations": {
+      "barcelona": "Barcelona, Spain",
+      "bulgaria": "Bulgaria",
+      "kyiv": "Kyiv, Ukraine",
+      "odesa": "Odesa, Ukraine"
+    }
+  },
+  "Footer": {
+    "description": "Production partner for architects and interior designers.",
+    "links": {
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "pdf": "Project Workflow (PDF)"
+    },
+    "copyright": "© {year} ProSperi. All rights reserved.",
+    "tagline": "Design → Engineering → Production → Installation"
+  }
+}
