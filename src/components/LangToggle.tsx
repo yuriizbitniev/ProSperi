@@ -1,38 +1,39 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 
 export function LangToggle() {
   const pathname = usePathname();
+  const router = useRouter();
   const currentLocale = useLocale();
 
   const toggleLanguage = () => {
     if (!pathname) return;
     
+    // Switch to the opposite locale
     const nextLocale = currentLocale === 'en' ? 'ru' : 'en';
     
-    // Split the path into segments, remove any empty string from start
-    const segments = pathname.split('/').filter(Boolean);
-    
-    // Check if the first segment is a known locale. If so, remove it.
-    if (segments[0] === 'en' || segments[0] === 'ru') {
-      segments.shift(); // remove the locale segment
-    }
-    
-    // Default locale (en) is stripped from the URL by default in next-intl
-    let switchPath = '';
-    if (nextLocale === 'en') {
-      switchPath = `/${segments.join('/')}`;
-    } else {
-      switchPath = `/${nextLocale}${segments.length > 0 ? '/' + segments.join('/') : ''}`;
-    }
-    
-    // Set cookie so middleware knows user preference (ignores Accept-Language)
+    // Set the Next.js locale cookie manually to inform the server of preference
     document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000`;
     
-    // Force a full document reload for locale cache bypass
-    window.location.href = switchPath;
+    // Split pathname to swap languages safely
+    const segments = pathname.split('/').filter(Boolean);
+    
+    // Remove current locale from the URL if it's there
+    if (segments[0] === 'en' || segments[0] === 'ru') {
+      segments.shift(); 
+    }
+    
+    // Generate new path 
+    const newPath = nextLocale === 'en' 
+      ? `/${segments.join('/')}` 
+      : `/${nextLocale}/${segments.join('/')}`;
+      
+    // Because next-intl intercepts the server routing based on cookies and paths,
+    // pushing the router with router.refresh() handles state transitions in 14.x cleanly
+    router.push(newPath || '/');
+    router.refresh();
   };
 
   return (
@@ -44,4 +45,3 @@ export function LangToggle() {
     </button>
   );
 }
-
