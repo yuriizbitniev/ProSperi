@@ -34,7 +34,7 @@ export default function KyivApartmentPage() {
         <div className="max-w-7xl mx-auto mb-12">
           <Link
             href="/#projects"
-            className="inline-flex items-center gap-2 text-sm font-medium tracking-wider uppercase text-foreground/60 hover:text-accent transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium tracking-wider uppercase text-muted hover:text-accent transition-colors"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
@@ -50,7 +50,7 @@ export default function KyivApartmentPage() {
               <h1 className="text-4xl md:text-7xl font-light tracking-tight mb-4">
                 {projectDetails.title}
               </h1>
-              <p className="text-lg md:text-xl text-foreground/60 font-light">
+              <p className="text-lg md:text-xl text-muted font-light">
                 {projectDetails.location} — {projectDetails.year}
               </p>
             </div>
@@ -58,7 +58,7 @@ export default function KyivApartmentPage() {
               {projectDetails.scope}
             </p>
           </div>
-          <p className="mt-8 text-lg md:text-xl text-foreground/70 font-light max-w-4xl leading-relaxed">
+          <p className="mt-8 text-lg md:text-xl text-muted font-light max-w-4xl leading-relaxed">
             {projectDetails.description}
           </p>
         </header>
@@ -69,7 +69,7 @@ export default function KyivApartmentPage() {
             {galleryImages.map((image, index) => (
               <div
                 key={index}
-                className={`group cursor-pointer overflow-hidden bg-black/5 dark:bg-white/5 ${
+                className={`group cursor-pointer overflow-hidden bg-surface ${
                   index === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
                 }`}
                 onClick={() => setLightboxIndex(index)}
@@ -88,7 +88,7 @@ export default function KyivApartmentPage() {
         <div className="max-w-7xl mx-auto mt-20 flex justify-center">
           <Link
             href="/#projects"
-            className="inline-flex items-center gap-3 px-10 py-5 border border-foreground/20 hover:border-accent hover:text-accent transition-all uppercase tracking-widest text-sm font-medium"
+            className="inline-flex items-center gap-3 px-10 py-5 border border-foreground/10 hover:border-accent hover:text-accent transition-all uppercase tracking-widest text-sm font-medium"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />

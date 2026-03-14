@@ -9,13 +9,13 @@ const mockProjects = [
 
 export function Projects() {
   return (
-    <section id="projects" className="py-24 px-6 md:px-12 bg-black/5 dark:bg-white/5">
+    <section id="projects" className="py-24 px-6 md:px-12 bg-surface">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-light tracking-wide mb-16">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {mockProjects.map((p) => (
             <Link key={p.id} href={p.href} className="group cursor-pointer block">
-              <div className="relative aspect-[4/5] overflow-hidden bg-black/10">
+              <div className="relative aspect-[4/5] overflow-hidden bg-background">
                 <img 
                   src={p.img} 
                   alt={p.title}
